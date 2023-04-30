@@ -19,7 +19,7 @@ print(pyscraping.title())
 ```
 
 ## Documentation
-### <head> tags
+### Head tags
 #### Get Website Title
 Scraping the title from a website is simple.
 ```python
@@ -102,7 +102,7 @@ pyscraping.twitterCard("twitter:title")
 # All
 pyscraping.twitterCard()
 ```
-### <body> tags
+### Body tags
 #### Get Headings by Level
 There might be cases, in which all headings of a particular level should be retrieved. The example below shows how to do so:
 ```python
