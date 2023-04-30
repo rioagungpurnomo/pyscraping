@@ -19,7 +19,7 @@ print(pyscraping.title())
 ```
 
 ## Documentation
-### Head tags
+### `<head>` tags
 #### Get Website Title
 Scraping the title from a website is simple.
 ```python
@@ -102,7 +102,7 @@ pyscraping.twitterCard("twitter:title")
 # All
 pyscraping.twitterCard()
 ```
-### Body tags
+### `<body>` tags
 #### Get Headings by Level
 There might be cases, in which all headings of a particular level should be retrieved. The example below shows how to do so:
 ```python
@@ -114,17 +114,17 @@ pyscraping.h5()
 pyscraping.h6()
 ```
 #### Get all Paragraphs
-The following example will return a list of all paragraphs (<p>-tags) on the website:
+The following example will return a list of all paragraphs (`<p>`-tags) on the website:
 ```python
 pyscraping.p()
 ```
 #### Get Unordered Lists
-The following example will return a list of all list (<ul>-tags) on the website:
+The following example will return a list of all list (`<ul>`-tags) on the website:
 ```python
 pyscraping.ul()
 ```
 #### Get Ordered Lists
-The following example will return a list of all list (<ol>-tags) on the website:
+The following example will return a list of all list (`<ol>`-tags) on the website:
 ```python
 pyscraping.ol()
 ```
