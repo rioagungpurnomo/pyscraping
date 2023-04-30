@@ -1,30 +1,23 @@
 import requests
+import sys
 from bs4 import BeautifulSoup
-from sys import exit as logout
 
 class PyScraping:
   def __init__(self, url):
     self.url = url
-    self.WHITE = '\x1b[1;97m'
-    self.RED = '\x1b[1;91m'
-    self.GREEN = '\x1b[1;92m'
-    self.YELLOW = '\x1b[1;93m'
-    self.PURPLE = '\x1b[1;94m'
-    self.BLUE = '\x1b[1;96m'
-    self.DEFAULT = '\x1b[0m'
-    self.success = f"{self.WHITE}[{self.GREEN}!{self.WHITE}]"
-    self.failed = f"{self.WHITE}[{self.RED}!{self.WHITE}]"
     try:
       response = requests.get(url)
       self.soup = BeautifulSoup(response.content, 'html.parser')
     except Exception:
-        logout(print(f"""\n{self.failed} Invalid URL or Domain.{self.DEFAULT}"""))
+      print("Invalid URL or Domain.")
+      sys.exit()
   
   def title(self):
     if self.url:
         return self.soup.title.string
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def charset(self):
     if self.url:
@@ -33,9 +26,10 @@ class PyScraping:
       if meta_charset:
         return meta_charset['charset']
       else:
-        logout(print(f"\n{self.failed} No charset found in meta tags.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def viewport(self):
     if self.url:
@@ -44,9 +38,10 @@ class PyScraping:
         viewport = viewport_tag['content']
         return viewport.split(",")
       else:
-        logout(print(f"\n{self.failed} No viewport meta tag found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def viewportString(self):
     if self.url:
@@ -54,9 +49,10 @@ class PyScraping:
       if viewport_tag:
         return viewport_tag['content']
       else:
-        logout(print(f"\n{self.failed} No viewport meta tag found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def canonical(self):
     if self.url:
@@ -64,9 +60,10 @@ class PyScraping:
       if canonical_tag:
         return canonical_tag['href']
       else:
-        logout(print(f"\n{self.failed} No canonical link found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def contentType(self):
     if self.url:
@@ -74,9 +71,10 @@ class PyScraping:
       if content_type_tag:
         return content_type_tag['content']
       else:
-        logout(print(f"\n{self.failed} No Content-Type meta tag found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def csrfToken(self):
     if self.url:
@@ -84,9 +82,10 @@ class PyScraping:
       if csrf_token_tag:
         return csrf_token_tag['content']
       else:
-        logout(print(f"\n{self.failed} No CSRF Token meta tag found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
   
   def author(self):
     if self.url:
@@ -94,9 +93,10 @@ class PyScraping:
       if author_tag:
         return author_tag['content']
       else:
-        logout(print(f"\n{self.failed} No Author meta tag found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
   
   def description(self):
     if self.url:
@@ -104,9 +104,10 @@ class PyScraping:
       if description_tag:
         return description_tag['content']
       else:
-        logout(print(f"\n{self.failed} No Description meta tag found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
   
   def image(self):
     if self.url:
@@ -114,9 +115,10 @@ class PyScraping:
       if image_tag:
         return image_tag['content']
       else:
-        logout(print(f"\n{self.failed} No Image meta tag found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
   
   def keywords(self):
     if self.url:
@@ -125,9 +127,10 @@ class PyScraping:
         keywords = keywords_tag['content']
         return keywords.split(",")
       else:
-        logout(print(f"\n{self.failed} No Keywords meta tag found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def keywordString(self):
     if self.url:
@@ -135,9 +138,10 @@ class PyScraping:
       if keywords_tag:
         return keywords_tag['content']
       else:
-        logout(print(f"\n{self.failed} No Keywords meta tag found.{self.DEFAULT}"))
+        return False
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def openGraph(self, openGraph = False):
     if self.url:
@@ -146,7 +150,7 @@ class PyScraping:
         if og:
           return og['content']
         else:
-          logout(print(f"\n{self.failed} No {openGraph} meta tag found.{self.DEFAULT}"))
+          return False
       else:
         og_site_name = self.soup.find('meta', attrs={'property': 'og:site_name'})
         og_type = self.soup.find('meta', attrs={'property': 'og:type'})
@@ -189,7 +193,8 @@ class PyScraping:
       array["og:image"] = image
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def twitterCard(self, twitterCard = False):
     if self.url:
@@ -199,7 +204,7 @@ class PyScraping:
         if twitter:
           return twitter['content']
         else:
-          logout(print(f"\n{self.failed} No {tc} meta tag found.{self.DEFAULT}"))
+          return False
       else:
         td = "twitter:description"
         twitter_card = self.soup.find('meta', attrs={'name': 'twitter:card'})
@@ -237,7 +242,8 @@ class PyScraping:
       array["twitter:image"] = image
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def h1(self):
     if self.url:
@@ -247,7 +253,8 @@ class PyScraping:
         array.append(h1.text)
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def h2(self):
     if self.url:
@@ -257,7 +264,8 @@ class PyScraping:
         array.append(h2.text)
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def h3(self):
     if self.url:
@@ -267,7 +275,8 @@ class PyScraping:
         array.append(h3.text)
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
       
   def h4(self):
     if self.url:
@@ -277,7 +286,8 @@ class PyScraping:
         array.append(h4.text)
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
  
   def h5(self):
     if self.url:
@@ -287,7 +297,8 @@ class PyScraping:
         array.append(h5.text)
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
   
   def h6(self):
     if self.url:
@@ -297,7 +308,8 @@ class PyScraping:
         array.append(h6.text)
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
 
   def p(self):
     if self.url:
@@ -307,7 +319,8 @@ class PyScraping:
         array.append(p.text)
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
  
   def ul(self):
     if self.url:
@@ -319,7 +332,8 @@ class PyScraping:
           array.append(item.text.strip())
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
   
   def ol(self):
     if self.url:
@@ -331,7 +345,8 @@ class PyScraping:
           array.append(item.text.strip())
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
  
   def images(self):
     if self.url:
@@ -341,7 +356,8 @@ class PyScraping:
         array.append(img.get("src"))
       return array
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
  
   def imagesDetails(self):
     if self.url:
@@ -359,7 +375,8 @@ class PyScraping:
       image_details.append(img_dict)
       return image_details
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
  
   def links(self):
     if self.url:
@@ -370,7 +387,8 @@ class PyScraping:
           links.append(href)
       return links
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
  
   def linksDetails(self):
     if self.url:
@@ -401,10 +419,12 @@ class PyScraping:
         })
       return result
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
  
   def filter(self, element, attribute):
     if self.url:
       return self.soup.find(element, attribute)
     else:
-      logout(print(f"\n{self.failed} URL cannot be empty.{self.DEFAULT}"))
+      print("URL cannot be empty.")
+      sys.exit()
