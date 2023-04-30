@@ -39,7 +39,7 @@ If you need to access the original "viewport"-string, you can use `viewportStrin
 ```python
 pyscraping.viewportString()
 ```
-#### Det Canonical URL
+#### Get Canonical URL
 The canonical URL, if given, can be accessed as shown in the example below:
 ```python
 pyscraping.canonical()
