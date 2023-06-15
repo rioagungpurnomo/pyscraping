@@ -159,11 +159,9 @@ pyscraping.filter('div', 'class="container"')
 ```
 
 ## Donate
-Saweria : **[Support me](https://saweria.co/rioagungpurnomo)**
-
-Trakteer : **[Support me](https://trakteer.id/rioagungpurnomo)**
-
-Paypal : **[Support me](https://www.paypal.me/rioagungpurnomoo)**
+- [Saweria](https://saweria.co/rioagungpurnomo)
+- [Trakteer](https://trakteer.id/rioagungpurnomo)
+- [PayPal](https://www.paypal.me/rioagungpurnomoo)
 
 ## Contact me
 Contact me via email: rioagungpurnomo@programmer.net, I'm waiting for your input or suggestions.
